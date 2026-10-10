@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+
+# Secrets
+.env
+
+# Data & indexes (keep folders, ignore contents)
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+chroma_db/
+
+# Eval outputs (commit eval_table.md manually if you want)
+results/*.json
+
+# Local environment files
+.envx
+
+# macOS metadata
+.DS_Store

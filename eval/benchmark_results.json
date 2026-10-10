@@ -1,0 +1,1902 @@
+[
+  {
+    "id": "q1",
+    "question": "What is Self-RAG?",
+    "answerable": true,
+    "reference_answer": "Self-RAG is a framework that trains a language model to retrieve passages on demand and to reflect on the retrieved evidence and its own generations using special reflection tokens.",
+    "results": {
+      "baseline": {
+        "answer": "Self-RAG is a model that generates both task output and intermittent special tokens, known as reflection tokens, to reflect on its own generation process.",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 1,
+        "latency_s": 27.36,
+        "wall_time_s": 27.5,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": 0.67,
+        "semantic_similarity": 0.816,
+        "semantic_pass": true,
+        "correct": true,
+        "possible_label_issue": false
+      },
+      "self_rag": {
+        "answer": "Self-RAG is a model that generates both task output and intermittent special tokens, known as reflection tokens, to reflect on its own generation process.",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 3,
+        "latency_s": 38.1,
+        "wall_time_s": 38.32,
+        "confidence": 1.0,
+        "used_retrieval": true,
+        "keyword_score": 0.67,
+        "semantic_similarity": 0.816,
+        "semantic_pass": true,
+        "correct": true,
+        "possible_label_issue": false
+      }
+    }
+  },
+  {
+    "id": "q2",
+    "question": "What are reflection tokens in Self-RAG?",
+    "answerable": true,
+    "reference_answer": "Reflection tokens are special tokens added to the model's vocabulary that the model generates to decide whether to retrieve and to critique retrieved passages and its own output.",
+    "results": {
+      "baseline": {
+        "answer": "Reflection tokens in Self-RAG are categorized into retrieval and critique tokens. Retrieval tokens indicate the need for retrieval, while critique tokens criticize the model's own output and choose the best one in terms of factuality and overall quality.",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 1,
+        "latency_s": 12.29,
+        "wall_time_s": 12.4,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": 0.67,
+        "semantic_similarity": 0.758,
+        "semantic_pass": true,
+        "correct": true,
+        "possible_label_issue": false
+      },
+      "self_rag": {
+        "answer": "Reflection tokens in SELF-RAG are categorized into retrieval and critique tokens. Retrieval tokens indicate the need for retrieval, while critique tokens are used to criticize the model's own output and choose the best one in terms of factuality and overall quality.",
+        "refused": false,
+        "attempts": 3,
+        "llm_calls": 11,
+        "latency_s": 101.46,
+        "wall_time_s": 101.66,
+        "confidence": 1.0,
+        "used_retrieval": true,
+        "keyword_score": 0.67,
+        "semantic_similarity": 0.771,
+        "semantic_pass": true,
+        "correct": true,
+        "possible_label_issue": false
+      }
+    }
+  },
+  {
+    "id": "q3",
+    "question": "What are the four types of reflection tokens used in Self-RAG?",
+    "answerable": true,
+    "reference_answer": "Retrieve, IsRel (relevance), IsSup (support), and IsUse (utility).",
+    "results": {
+      "baseline": {
+        "answer": "According to the context, there are two types of reflection tokens used in Self-RAG: retrieval tokens and critique tokens.",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 1,
+        "latency_s": 8.18,
+        "wall_time_s": 8.28,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": 0.0,
+        "semantic_similarity": 0.317,
+        "semantic_pass": false,
+        "correct": false,
+        "possible_label_issue": false
+      },
+      "self_rag": {
+        "answer": "I don't have enough information in the provided documents to answer this.",
+        "refused": true,
+        "attempts": 1,
+        "llm_calls": 2,
+        "latency_s": 16.45,
+        "wall_time_s": 16.53,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": 0.0,
+        "semantic_similarity": 0.102,
+        "semantic_pass": false,
+        "correct": false,
+        "possible_label_issue": false
+      }
+    }
+  },
+  {
+    "id": "q4",
+    "question": "What does the Retrieve token decide in Self-RAG?",
+    "answerable": true,
+    "reference_answer": "It decides whether retrieval is needed for the current segment, with outputs such as yes, no, or continue.",
+    "results": {
+      "baseline": {
+        "answer": "The Retrieve token in Self-RAG calls a retriever model on demand, indicating the need for retrieval.",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 1,
+        "latency_s": 9.9,
+        "wall_time_s": 9.99,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": 0.25,
+        "semantic_similarity": 0.501,
+        "semantic_pass": false,
+        "correct": false,
+        "possible_label_issue": false
+      },
+      "self_rag": {
+        "answer": "The retrieval token decides whether augmenting the continued generation with retrieved passages would be helpful.",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 3,
+        "latency_s": 22.39,
+        "wall_time_s": 22.46,
+        "confidence": 1.0,
+        "used_retrieval": true,
+        "keyword_score": 0.5,
+        "semantic_similarity": 0.62,
+        "semantic_pass": true,
+        "correct": true,
+        "possible_label_issue": false
+      }
+    }
+  },
+  {
+    "id": "q5",
+    "question": "What does the IsRel token evaluate in Self-RAG?",
+    "answerable": true,
+    "reference_answer": "It evaluates whether a retrieved passage is relevant to the input query.",
+    "results": {
+      "baseline": {
+        "answer": "The IsRel token in Self-RAG evaluates the relevance of retrieved passages.",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 1,
+        "latency_s": 10.24,
+        "wall_time_s": 10.33,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": 0.67,
+        "semantic_similarity": 0.5,
+        "semantic_pass": false,
+        "correct": false,
+        "possible_label_issue": false
+      },
+      "self_rag": {
+        "answer": "The IsRel token evaluates whether the model output is irrelevant.",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 3,
+        "latency_s": 20.4,
+        "wall_time_s": 20.46,
+        "confidence": 1.0,
+        "used_retrieval": true,
+        "keyword_score": 0.67,
+        "semantic_similarity": 0.37,
+        "semantic_pass": false,
+        "correct": false,
+        "possible_label_issue": false
+      }
+    }
+  },
+  {
+    "id": "q6",
+    "question": "What does the IsSup token evaluate in Self-RAG?",
+    "answerable": true,
+    "reference_answer": "It evaluates whether the generated response is supported by the retrieved passage, such as fully supported, partially supported, or not supported.",
+    "results": {
+      "baseline": {
+        "answer": "The IsSup token evaluates the support for the model's output in Self-RAG.",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 1,
+        "latency_s": 11.28,
+        "wall_time_s": 11.33,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": 0.33,
+        "semantic_similarity": 0.467,
+        "semantic_pass": false,
+        "correct": false,
+        "possible_label_issue": false
+      },
+      "self_rag": {
+        "answer": "I don't have enough information in the provided documents to answer this.",
+        "refused": true,
+        "attempts": 2,
+        "llm_calls": 6,
+        "latency_s": 47.22,
+        "wall_time_s": 47.24,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": 0.0,
+        "semantic_similarity": 0.317,
+        "semantic_pass": false,
+        "correct": false,
+        "possible_label_issue": false
+      }
+    }
+  },
+  {
+    "id": "q7",
+    "question": "What does the IsUse token evaluate in Self-RAG?",
+    "answerable": true,
+    "reference_answer": "It rates the overall usefulness of the generated response to the query, on a scale of 1 to 5.",
+    "results": {
+      "baseline": {
+        "answer": "The IsUse token in Self-RAG evaluates whether the following answers may not be factually grounded, indicating that the generated answers may be irrelevant.",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 1,
+        "latency_s": 6.0,
+        "wall_time_s": 6.07,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": 0.25,
+        "semantic_similarity": 0.271,
+        "semantic_pass": false,
+        "correct": false,
+        "possible_label_issue": false
+      },
+      "self_rag": {
+        "answer": "The IsUse token in SELF-RAG evaluates the relevance of retrieved passages.",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 3,
+        "latency_s": 20.69,
+        "wall_time_s": 20.72,
+        "confidence": 1.0,
+        "used_retrieval": true,
+        "keyword_score": 0.25,
+        "semantic_similarity": 0.312,
+        "semantic_pass": false,
+        "correct": false,
+        "possible_label_issue": false
+      }
+    }
+  },
+  {
+    "id": "q8",
+    "question": "What is the role of the critic model in Self-RAG training?",
+    "answerable": true,
+    "reference_answer": "The critic model is trained to produce reflection tokens and is used to annotate the training corpus offline, so the generator can learn to emit reflection tokens without a critic at inference time.",
+    "results": {
+      "baseline": {
+        "answer": "The critic model, denoted as C, is used to assess the relevance and supportiveness of retrieved passages and to predict reflection tokens, including critique tokens, critique tokens for retrieval (ISREL) and critique tokens for generation (ISSUP), and an overall utility token (ISUSE).",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 1,
+        "latency_s": 14.71,
+        "wall_time_s": 14.73,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": 0.5,
+        "semantic_similarity": 0.727,
+        "semantic_pass": true,
+        "correct": true,
+        "possible_label_issue": false
+      },
+      "self_rag": {
+        "answer": "The critic model, denoted as C, is used to evaluate the relevance and support of retrieved passages, and to predict the overall utility token ISUSE. It achieves a higher than 90% agreement with GPT-4-based predictions on most reflection token categories.",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 3,
+        "latency_s": 38.58,
+        "wall_time_s": 38.69,
+        "confidence": 1.0,
+        "used_retrieval": true,
+        "keyword_score": 0.25,
+        "semantic_similarity": 0.605,
+        "semantic_pass": true,
+        "correct": true,
+        "possible_label_issue": false
+      }
+    }
+  },
+  {
+    "id": "q9",
+    "question": "How does Self-RAG differ from standard RAG in when it retrieves?",
+    "answerable": true,
+    "reference_answer": "Standard RAG retrieves a fixed number of passages for every query, whereas Self-RAG retrieves adaptively, only when the model decides retrieval is helpful.",
+    "results": {
+      "baseline": {
+        "answer": "Self-RAG differs from standard RAG in that it first determines if augmenting the continued generation with retrieved passages would be helpful, and if so, it outputs a retrieval token that calls a retriever model on demand.",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 1,
+        "latency_s": 15.59,
+        "wall_time_s": 15.69,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": 0.5,
+        "semantic_similarity": 0.857,
+        "semantic_pass": true,
+        "correct": true,
+        "possible_label_issue": false
+      },
+      "self_rag": {
+        "answer": "Self-RAG differs from standard RAG in that it first determines if augmenting the continued generation with retrieved passages would be helpful, and if so, it outputs a retrieval token that calls a retriever model on demand.",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 3,
+        "latency_s": 39.15,
+        "wall_time_s": 39.24,
+        "confidence": 1.0,
+        "used_retrieval": true,
+        "keyword_score": 0.5,
+        "semantic_similarity": 0.857,
+        "semantic_pass": true,
+        "correct": true,
+        "possible_label_issue": false
+      }
+    }
+  },
+  {
+    "id": "q10",
+    "question": "How can Self-RAG's behavior be customized at inference time?",
+    "answerable": true,
+    "reference_answer": "By using reflection tokens to control decoding, such as weighting the critique token probabilities in segment-level beam search or setting thresholds for retrieval, without retraining.",
+    "results": {
+      "baseline": {
+        "answer": "Self-RAG's behavior can be customized at inference time through the use of reflection tokens. Specifically, the reflection tokens, such as ISREL and ISSUP, can be used to evaluate the relevance and support of the generated output, allowing the model to choose the best output and generate new output based on the reflection tokens.",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 1,
+        "latency_s": 13.02,
+        "wall_time_s": 13.08,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": 0.75,
+        "semantic_similarity": 0.384,
+        "semantic_pass": false,
+        "correct": false,
+        "possible_label_issue": false
+      },
+      "self_rag": {
+        "answer": "Self-RAG's behavior can be customized at inference time by adjusting the augmentation strategy, such as deciding whether to augment the continued generation with retrieved passages, and by tuning the hyperparameters of the retriever model and the generation process.",
+        "refused": false,
+        "attempts": 2,
+        "llm_calls": 7,
+        "latency_s": 101.22,
+        "wall_time_s": 101.34,
+        "confidence": 1.0,
+        "used_retrieval": true,
+        "keyword_score": 0.5,
+        "semantic_similarity": 0.353,
+        "semantic_pass": false,
+        "correct": false,
+        "possible_label_issue": false
+      }
+    }
+  },
+  {
+    "id": "q11",
+    "question": "What are the three desiderata considered when motivating self-attention?",
+    "answerable": true,
+    "reference_answer": "They are total computational complexity per layer, the amount of computation that can be parallelized, and the path length between long-range dependencies.",
+    "results": {
+      "baseline": {
+        "answer": "The three desiderata considered when motivating self-attention are: \n\n1. The total computational complexity per layer.\n2. The amount of computation that can be parallelized, as measured by the minimum number of sequential operations required.\n3. The path length between long-range dependencies in the network.",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 1,
+        "latency_s": 14.09,
+        "wall_time_s": 14.17,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": 1.0,
+        "semantic_similarity": 0.478,
+        "semantic_pass": false,
+        "correct": false,
+        "possible_label_issue": false
+      },
+      "self_rag": {
+        "answer": "The three desiderata considered when motivating self-attention are: \n\n1. The total computational complexity per layer.\n2. The amount of computation that can be parallelized, as measured by the minimum number of sequential operations required.\n3. The path length between long-range dependencies in the network.",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 3,
+        "latency_s": 29.75,
+        "wall_time_s": 29.8,
+        "confidence": 1.0,
+        "used_retrieval": true,
+        "keyword_score": 1.0,
+        "semantic_similarity": 0.478,
+        "semantic_pass": false,
+        "correct": false,
+        "possible_label_issue": false
+      }
+    }
+  },
+  {
+    "id": "q12",
+    "question": "What is scaled dot-product attention?",
+    "answerable": true,
+    "reference_answer": "It computes attention as softmax(QK^T / sqrt(d_k)) V, where the dot products of queries and keys are scaled by the square root of the key dimension.",
+    "results": {
+      "baseline": {
+        "answer": "Scaled Dot-Product Attention is a particular attention mechanism described in the text, where the input consists of queries and keys of dimension dk, and values of dimension dv. It computes the dot products of the query with all keys, divides each by \u221adk, and applies a softmax function to obtain the weights on the values.",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 1,
+        "latency_s": 15.08,
+        "wall_time_s": 15.13,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": 0.6,
+        "semantic_similarity": 0.805,
+        "semantic_pass": true,
+        "correct": true,
+        "possible_label_issue": false
+      },
+      "self_rag": {
+        "answer": "Scaled dot-product attention is a type of attention mechanism used in the transformer architecture, where the input consists of queries and keys of dimension d_k, and values of dimension d_v. It computes the dot products of the query with all keys, divides each by \u221ad_k, and applies a softmax function to obtain the weights on the values.",
+        "refused": false,
+        "attempts": 3,
+        "llm_calls": 9,
+        "latency_s": 83.37,
+        "wall_time_s": 83.45,
+        "confidence": 1.0,
+        "used_retrieval": true,
+        "keyword_score": 0.8,
+        "semantic_similarity": 0.727,
+        "semantic_pass": true,
+        "correct": true,
+        "possible_label_issue": false
+      }
+    }
+  },
+  {
+    "id": "q13",
+    "question": "Why are the dot products scaled by the square root of d_k in the Transformer?",
+    "answerable": true,
+    "reference_answer": "For large d_k the dot products grow large in magnitude, pushing the softmax into regions with extremely small gradients, so scaling counteracts this.",
+    "results": {
+      "baseline": {
+        "answer": "The dot products in the Transformer are scaled by the square root of d_k because the Transformer uses scaled dot-product attention units. The scaling factor is \u221ad_k, where d_k is the dimension of the query (or key) vectors.",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 1,
+        "latency_s": 13.53,
+        "wall_time_s": 13.59,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": 0.25,
+        "semantic_similarity": 0.543,
+        "semantic_pass": false,
+        "correct": false,
+        "possible_label_issue": false
+      },
+      "self_rag": {
+        "answer": "The dot products are scaled by the square root of d_k to counteract the effect of large dot products pushing the softmax function into regions where it has extremely small gradients.",
+        "refused": false,
+        "attempts": 3,
+        "llm_calls": 9,
+        "latency_s": 74.55,
+        "wall_time_s": 74.61,
+        "confidence": 1.0,
+        "used_retrieval": true,
+        "keyword_score": 1.0,
+        "semantic_similarity": 0.911,
+        "semantic_pass": true,
+        "correct": true,
+        "possible_label_issue": false
+      }
+    }
+  },
+  {
+    "id": "q14",
+    "question": "What is multi-head attention and why is it used?",
+    "answerable": true,
+    "reference_answer": "Multi-head attention runs several attention functions in parallel on different learned linear projections of queries, keys and values, letting the model attend to information from different representation subspaces at different positions.",
+    "results": {
+      "baseline": {
+        "answer": "Multi-head attention is a technique used in transformer models where the input is divided into multiple attention heads, each of which attends to different parts of the input simultaneously. This allows the model to jointly attend to information from different representation subspaces at different positions. It is used to capture more complex and long-range dependencies in deeper layers, and to enable the model to attend to different definitions of \"relevance\" simultaneously.",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 1,
+        "latency_s": 17.43,
+        "wall_time_s": 17.5,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": 0.5,
+        "semantic_similarity": 0.722,
+        "semantic_pass": true,
+        "correct": true,
+        "possible_label_issue": false
+      },
+      "self_rag": {
+        "answer": "Multi-head attention is a technique used in transformer models where the input is divided into multiple attention heads, each of which attends to different parts of the input simultaneously. This allows the model to jointly attend to information from different representation subspaces at different positions. It is used to enable the model to capture more complex and long-range dependencies in deeper layers, and to allow the model to attend to different definitions of \"relevance\".",
+        "refused": false,
+        "attempts": 3,
+        "llm_calls": 11,
+        "latency_s": 136.72,
+        "wall_time_s": 136.85,
+        "confidence": 1.0,
+        "used_retrieval": true,
+        "keyword_score": 0.5,
+        "semantic_similarity": 0.72,
+        "semantic_pass": true,
+        "correct": true,
+        "possible_label_issue": false
+      }
+    }
+  },
+  {
+    "id": "q15",
+    "question": "Why does the Transformer need positional encodings?",
+    "answerable": true,
+    "reference_answer": "The model has no recurrence or convolution, so positional encodings, using sine and cosine functions of different frequencies, inject information about the order of tokens in the sequence.",
+    "results": {
+      "baseline": {
+        "answer": "The Transformer needs positional encodings because self-attention alone is permutation-invariant, meaning that the order of the input tokens does not affect the output. Positional encodings provide the model with information about the relative positions of tokens within a sequence, allowing the model to understand the order of the input and process it accordingly.",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 1,
+        "latency_s": 18.33,
+        "wall_time_s": 18.47,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": 0.5,
+        "semantic_similarity": 0.614,
+        "semantic_pass": true,
+        "correct": true,
+        "possible_label_issue": false
+      },
+      "self_rag": {
+        "answer": "The Transformer needs positional encodings because self-attention alone is permutation-invariant, meaning that the order of tokens does not affect the output. To address this, positional encodings provide the model with information about the relative positions of tokens within a sequence, allowing the Transformer to capture the order of the input sequence.",
+        "refused": false,
+        "attempts": 3,
+        "llm_calls": 11,
+        "latency_s": 86.09,
+        "wall_time_s": 86.19,
+        "confidence": 1.0,
+        "used_retrieval": true,
+        "keyword_score": 0.5,
+        "semantic_similarity": 0.631,
+        "semantic_pass": true,
+        "correct": true,
+        "possible_label_issue": false
+      }
+    }
+  },
+  {
+    "id": "q16",
+    "question": "What is CRAG?",
+    "answerable": true,
+    "reference_answer": "CRAG (Corrective Retrieval Augmented Generation) is a method that adds a lightweight retrieval evaluator to judge the quality of retrieved documents and triggers corrective actions to improve the robustness of generation.",
+    "results": {
+      "baseline": {
+        "answer": "CRAG is a plug-and-play method that improves the robustness and resilience of RAG-based approaches by incorporating knowledge from external sources.",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 1,
+        "latency_s": 13.32,
+        "wall_time_s": 13.42,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": 0.33,
+        "semantic_similarity": 0.669,
+        "semantic_pass": true,
+        "correct": true,
+        "possible_label_issue": false
+      },
+      "self_rag": {
+        "answer": "I don't have enough information in the provided documents to answer this.",
+        "refused": true,
+        "attempts": 2,
+        "llm_calls": 6,
+        "latency_s": 52.92,
+        "wall_time_s": 52.94,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": 0.0,
+        "semantic_similarity": 0.12,
+        "semantic_pass": false,
+        "correct": false,
+        "possible_label_issue": false
+      }
+    }
+  },
+  {
+    "id": "q17",
+    "question": "What is the role of the retrieval evaluator in CRAG?",
+    "answerable": true,
+    "reference_answer": "It is a lightweight model that estimates the relevance of retrieved documents to the query and produces a confidence score used to trigger one of the corrective actions.",
+    "results": {
+      "baseline": {
+        "answer": "The retrieval evaluator is designed to assess the overall quality of retrieved documents for a query and quantify a confidence degree based on which different knowledge retrieval actions of {Correct, Incorrect, Ambiguous} can be triggered.",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 1,
+        "latency_s": 12.22,
+        "wall_time_s": 12.29,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": 0.5,
+        "semantic_similarity": 0.669,
+        "semantic_pass": true,
+        "correct": true,
+        "possible_label_issue": false
+      },
+      "self_rag": {
+        "answer": "The retrieval evaluator is a lightweight T5-based model that serves as a retrieval component in the CRAG (Corrective Rag) system, which is used to retrieve relevant documents for a given prompt.",
+        "refused": false,
+        "attempts": 3,
+        "llm_calls": 11,
+        "latency_s": 87.35,
+        "wall_time_s": 87.42,
+        "confidence": 1.0,
+        "used_retrieval": true,
+        "keyword_score": 0.5,
+        "semantic_similarity": 0.58,
+        "semantic_pass": true,
+        "correct": true,
+        "possible_label_issue": false
+      }
+    }
+  },
+  {
+    "id": "q18",
+    "question": "What are the three actions CRAG can trigger based on the retrieval evaluator's confidence?",
+    "answerable": true,
+    "reference_answer": "Correct, Incorrect, and Ambiguous.",
+    "results": {
+      "baseline": {
+        "answer": "CRAG can trigger three actions: Correct, Incorrect, and Ambiguous.",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 1,
+        "latency_s": 10.63,
+        "wall_time_s": 10.69,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": 1.0,
+        "semantic_similarity": 0.415,
+        "semantic_pass": false,
+        "correct": false,
+        "possible_label_issue": false
+      },
+      "self_rag": {
+        "answer": "CRAG can trigger three actions: Correct, Incorrect, and Ambiguous.",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 3,
+        "latency_s": 29.24,
+        "wall_time_s": 29.29,
+        "confidence": 1.0,
+        "used_retrieval": true,
+        "keyword_score": 1.0,
+        "semantic_similarity": 0.415,
+        "semantic_pass": false,
+        "correct": false,
+        "possible_label_issue": false
+      }
+    }
+  },
+  {
+    "id": "q19",
+    "question": "What is the decompose-then-recompose algorithm in CRAG?",
+    "answerable": true,
+    "reference_answer": "Retrieved documents are decomposed into fine-grained knowledge strips, irrelevant strips are filtered out using the evaluator's scores, and the relevant strips are recomposed into refined knowledge.",
+    "results": {
+      "baseline": {
+        "answer": "The decompose-then-recompose algorithm in CRAG is not explicitly stated in the provided context.",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 1,
+        "latency_s": 15.15,
+        "wall_time_s": 15.21,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": 0.5,
+        "semantic_similarity": 0.251,
+        "semantic_pass": false,
+        "correct": false,
+        "possible_label_issue": false
+      },
+      "self_rag": {
+        "answer": "I don't have enough information in the provided documents to answer this.",
+        "refused": true,
+        "attempts": 1,
+        "llm_calls": 2,
+        "latency_s": 15.4,
+        "wall_time_s": 15.46,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": 0.0,
+        "semantic_similarity": 0.211,
+        "semantic_pass": false,
+        "correct": false,
+        "possible_label_issue": false
+      }
+    }
+  },
+  {
+    "id": "q20",
+    "question": "What does CRAG do when the retrieved documents are judged Incorrect?",
+    "answerable": true,
+    "reference_answer": "It discards the retrieved documents and falls back to large-scale web search to obtain corrective knowledge.",
+    "results": {
+      "baseline": {
+        "answer": "When the retrieved documents are judged Incorrect, CRAG seeks new sources of knowledge for correction by introducing a web search to search from the Internet.",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 1,
+        "latency_s": 10.05,
+        "wall_time_s": 10.11,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": 0.67,
+        "semantic_similarity": 0.645,
+        "semantic_pass": true,
+        "correct": true,
+        "possible_label_issue": false
+      },
+      "self_rag": {
+        "answer": "When the retrieved documents are judged as Incorrect, CRAG uses external knowledge to replace the retrieved items.",
+        "refused": false,
+        "attempts": 3,
+        "llm_calls": 11,
+        "latency_s": 82.19,
+        "wall_time_s": 82.25,
+        "confidence": 1.0,
+        "used_retrieval": true,
+        "keyword_score": 0.33,
+        "semantic_similarity": 0.542,
+        "semantic_pass": false,
+        "correct": false,
+        "possible_label_issue": false
+      }
+    }
+  },
+  {
+    "id": "q21",
+    "question": "What is the bias-variance trade-off?",
+    "answerable": true,
+    "reference_answer": "Good test performance requires both low variance and low squared bias; it is easy to get very low bias with high variance (a curve through every training point) or low variance with high bias (a horizontal line), so the challenge is finding a method with both low.",
+    "results": {
+      "baseline": {
+        "answer": "The bias-variance trade-off is a trade-off between the bias and variance of a statistical learning method, where low bias and low variance are preferred to achieve good test set performance.",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 1,
+        "latency_s": 14.15,
+        "wall_time_s": 14.23,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": 1.0,
+        "semantic_similarity": 0.65,
+        "semantic_pass": true,
+        "correct": true,
+        "possible_label_issue": false
+      },
+      "self_rag": {
+        "answer": "The bias-variance trade-off is a trade-off between the bias of a statistical learning method (how close its predictions are to the true function) and its variance (how much the predictions vary from each other when the training data is changed).",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 3,
+        "latency_s": 36.23,
+        "wall_time_s": 36.3,
+        "confidence": 1.0,
+        "used_retrieval": true,
+        "keyword_score": 0.75,
+        "semantic_similarity": 0.415,
+        "semantic_pass": false,
+        "correct": false,
+        "possible_label_issue": false
+      }
+    }
+  },
+  {
+    "id": "q22",
+    "question": "What is overfitting?",
+    "answerable": true,
+    "reference_answer": "Overfitting is the phenomenon where a model follows the errors, or noise, in the training data too closely.",
+    "results": {
+      "baseline": {
+        "answer": "Overfitting is the production of an analysis that corresponds too closely or exactly to a particular set of data and may therefore fail to fit to additional data or predict future observations reliably.",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 1,
+        "latency_s": 13.75,
+        "wall_time_s": 13.85,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": 0.25,
+        "semantic_similarity": 0.856,
+        "semantic_pass": true,
+        "correct": true,
+        "possible_label_issue": false
+      },
+      "self_rag": {
+        "answer": "Overfitting is the production of an analysis that corresponds too closely or exactly to a particular set of data and may therefore fail to fit to additional data or predict future observations reliably.",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 3,
+        "latency_s": 28.66,
+        "wall_time_s": 28.69,
+        "confidence": 1.0,
+        "used_retrieval": true,
+        "keyword_score": 0.25,
+        "semantic_similarity": 0.856,
+        "semantic_pass": true,
+        "correct": true,
+        "possible_label_issue": false
+      }
+    }
+  },
+  {
+    "id": "q23",
+    "question": "What does the least squares approach choose the coefficients to minimize?",
+    "answerable": true,
+    "reference_answer": "It chooses the coefficient estimates that minimize the residual sum of squares (RSS).",
+    "results": {
+      "baseline": {
+        "answer": "The least squares approach chooses the coefficients to minimize the residual sum of squares, which is defined as RSS = n\u2211 i=1 \uf8eb \uf8ed yi \u2212 \u03b20 \u2212 p\u2211 j=1 \u03b2j xij \uf8f6 \uf8f8 2 .",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 1,
+        "latency_s": 16.29,
+        "wall_time_s": 16.32,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": 1.0,
+        "semantic_similarity": 0.755,
+        "semantic_pass": true,
+        "correct": true,
+        "possible_label_issue": false
+      },
+      "self_rag": {
+        "answer": "The least squares approach chooses the coefficients to minimize the residual sum of squares, which is defined as RSS = n\u2211 i=1 \uf8eb \uf8ed yi \u2212 \u03b20 \u2212 p\u2211 j=1 \u03b2j xij \uf8f6 \uf8f8 2 .",
+        "refused": false,
+        "attempts": 3,
+        "llm_calls": 9,
+        "latency_s": 66.75,
+        "wall_time_s": 66.85,
+        "confidence": 1.0,
+        "used_retrieval": true,
+        "keyword_score": 1.0,
+        "semantic_similarity": 0.755,
+        "semantic_pass": true,
+        "correct": true,
+        "possible_label_issue": false
+      }
+    }
+  },
+  {
+    "id": "q24",
+    "question": "How is the R\u00b2 statistic defined?",
+    "answerable": true,
+    "reference_answer": "R\u00b2 = (TSS \u2212 RSS) / TSS = 1 \u2212 RSS/TSS, the proportion of variance explained, which takes a value between 0 and 1 and is independent of the scale of Y.",
+    "results": {
+      "baseline": {
+        "answer": "The R\u00b2 statistic is defined as the proportion of variance explained in the response Y, calculated using the formula R\u00b2 = TSS \u2212 RSS, where TSS is the total sum of squares and RSS is the residual sum of squares.",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 1,
+        "latency_s": 10.62,
+        "wall_time_s": 10.74,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": 0.75,
+        "semantic_similarity": 0.804,
+        "semantic_pass": true,
+        "correct": true,
+        "possible_label_issue": false
+      },
+      "self_rag": {
+        "answer": "The R2 statistic is defined as the proportion of variance explained, taking the form of a proportion between 0 and 1, and is calculated using the formula R2 = TSS \u2212 RSS, where TSS is the total sum of squares and RSS is the residual sum of squares.",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 3,
+        "latency_s": 47.77,
+        "wall_time_s": 47.84,
+        "confidence": 1.0,
+        "used_retrieval": true,
+        "keyword_score": 1.0,
+        "semantic_similarity": 0.728,
+        "semantic_pass": true,
+        "correct": true,
+        "possible_label_issue": false
+      }
+    }
+  },
+  {
+    "id": "q25",
+    "question": "What does the ridge regression penalty add to the RSS?",
+    "answerable": true,
+    "reference_answer": "It adds \u03bb times the sum of the squared coefficients (a shrinkage penalty), where \u03bb \u2265 0 is a tuning parameter.",
+    "results": {
+      "baseline": {
+        "answer": "The ridge regression penalty adds the term \u2211 p j=1 \u03b22 j to the RSS.",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 1,
+        "latency_s": 15.87,
+        "wall_time_s": 15.97,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": 0.25,
+        "semantic_similarity": 0.488,
+        "semantic_pass": false,
+        "correct": false,
+        "possible_label_issue": false
+      },
+      "self_rag": {
+        "answer": "The ridge regression penalty adds to the RSS (Residual Sum of Squares) by increasing it as \u03bb increases.",
+        "refused": false,
+        "attempts": 3,
+        "llm_calls": 9,
+        "latency_s": 70.64,
+        "wall_time_s": 70.78,
+        "confidence": 1.0,
+        "used_retrieval": true,
+        "keyword_score": 0.5,
+        "semantic_similarity": 0.594,
+        "semantic_pass": true,
+        "correct": true,
+        "possible_label_issue": false
+      }
+    }
+  },
+  {
+    "id": "q26",
+    "question": "How does the lasso penalty differ from the ridge penalty?",
+    "answerable": true,
+    "reference_answer": "The lasso replaces the squared coefficient term \u03b2j\u00b2 in the ridge penalty with the absolute value |\u03b2j|.",
+    "results": {
+      "baseline": {
+        "answer": "The lasso penalty is a sum of absolute values of the coefficients, i.e., \u2211 p j=1 |\u03b2j |, whereas the ridge penalty is a sum of squared values of the coefficients, i.e., \u2211 p j=1 \u03b22 j [4].",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 1,
+        "latency_s": 12.77,
+        "wall_time_s": 12.84,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": 0.75,
+        "semantic_similarity": 0.807,
+        "semantic_pass": true,
+        "correct": true,
+        "possible_label_issue": false
+      },
+      "self_rag": {
+        "answer": "The lasso penalty is defined as the sum of the absolute values of the coefficients, P(\u03b2) = \u2211 p j=1 |\u03b2j |, whereas the ridge penalty is defined as the sum of the squared coefficients, P(\u03b2) = \u2211 p j=1 \u03b22 j [4].",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 3,
+        "latency_s": 32.68,
+        "wall_time_s": 32.76,
+        "confidence": 1.0,
+        "used_retrieval": true,
+        "keyword_score": 0.75,
+        "semantic_similarity": 0.806,
+        "semantic_pass": true,
+        "correct": true,
+        "possible_label_issue": false
+      }
+    }
+  },
+  {
+    "id": "q27",
+    "question": "What values of k are typically used in k-fold cross-validation, and why?",
+    "answerable": true,
+    "reference_answer": "Typically k = 5 or k = 10, since these values have been shown empirically to give test error estimates that suffer neither from excessively high bias nor from very high variance.",
+    "results": {
+      "baseline": {
+        "answer": "Typically, values of k used in k-fold cross-validation range from 5 to 10. This range is often chosen because it provides a good balance between bias and variance. A small value of k (e.g., 5) provides a more flexible fit, which can lead to low bias but high variance, while a larger value of k (e.g., 10) provides a more stable fit, which can lead to high bias but low variance.",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 1,
+        "latency_s": 13.93,
+        "wall_time_s": 13.99,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": 0.5,
+        "semantic_similarity": 0.742,
+        "semantic_pass": true,
+        "correct": true,
+        "possible_label_issue": false
+      },
+      "self_rag": {
+        "answer": "Typically, values of k are chosen to be a small number, such as 5 or 10, because a small value of k provides the most flexible fit, which will have low bias but high variance.",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 3,
+        "latency_s": 29.95,
+        "wall_time_s": 29.99,
+        "confidence": 1.0,
+        "used_retrieval": true,
+        "keyword_score": 0.5,
+        "semantic_similarity": 0.772,
+        "semantic_pass": true,
+        "correct": true,
+        "possible_label_issue": false
+      }
+    }
+  },
+  {
+    "id": "q28",
+    "question": "What is the Bayes classifier in a two-class problem?",
+    "answerable": true,
+    "reference_answer": "It assigns each observation to the most likely class given its predictor values, predicting class one if Pr(Y = 1 | X = x0) > 0.5 and class two otherwise.",
+    "results": {
+      "baseline": {
+        "answer": "In a two-class problem, the Bayes classifier corresponds to predicting class one if Pr(Y =1 |X = x0) > 0.5, and class two otherwise.",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 1,
+        "latency_s": 12.38,
+        "wall_time_s": 12.46,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": 0.5,
+        "semantic_similarity": 0.646,
+        "semantic_pass": true,
+        "correct": true,
+        "possible_label_issue": false
+      },
+      "self_rag": {
+        "answer": "The Bayes classifier in a two-class problem assigns a test observation to the class for which Pr(Y = j|X = x0) (2.10) is largest.",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 3,
+        "latency_s": 34.62,
+        "wall_time_s": 34.68,
+        "confidence": 1.0,
+        "used_retrieval": true,
+        "keyword_score": 0.25,
+        "semantic_similarity": 0.629,
+        "semantic_pass": true,
+        "correct": true,
+        "possible_label_issue": false
+      }
+    }
+  },
+  {
+    "id": "q29",
+    "question": "What is the logistic function used in logistic regression?",
+    "answerable": true,
+    "reference_answer": "p(X) = e^(\u03b20 + \u03b21X) / (1 + e^(\u03b20 + \u03b21X)), fit using maximum likelihood.",
+    "results": {
+      "baseline": {
+        "answer": "The logistic function used in logistic regression is \u03b7(\u00b5) = log(\u00b5/(1 \u2212 \u00b5)).",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 1,
+        "latency_s": 13.56,
+        "wall_time_s": 13.59,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": 0.5,
+        "semantic_similarity": 0.322,
+        "semantic_pass": false,
+        "correct": false,
+        "possible_label_issue": false
+      },
+      "self_rag": {
+        "answer": "The logistic function used in logistic regression is log ( p(X) 1 \u2212 p(X) ) = \u03b20 + \u03b21X, where the log odds or logit is linear in X.",
+        "refused": false,
+        "attempts": 3,
+        "llm_calls": 11,
+        "latency_s": 108.06,
+        "wall_time_s": 108.2,
+        "confidence": 0.75,
+        "used_retrieval": true,
+        "keyword_score": 0.75,
+        "semantic_similarity": 0.39,
+        "semantic_pass": false,
+        "correct": false,
+        "possible_label_issue": false
+      }
+    }
+  },
+  {
+    "id": "q30",
+    "question": "What is the curse of dimensionality?",
+    "answerable": true,
+    "reference_answer": "When p is large, the K observations nearest to a test observation may be very far away in p-dimensional space, giving a poor KNN fit.",
+    "results": {
+      "baseline": {
+        "answer": "The curse of dimensionality is a phenomenon where local approaches that perform prediction using only observations near the test observation for which a prediction must be made perform poorly when the number of features (p) is large.",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 1,
+        "latency_s": 13.4,
+        "wall_time_s": 13.52,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": 0.25,
+        "semantic_similarity": 0.51,
+        "semantic_pass": false,
+        "correct": false,
+        "possible_label_issue": false
+      },
+      "self_rag": {
+        "answer": "The curse of dimensionality is a phenomenon where local approaches perform prediction using only observations that are near the test observation for which a prediction must be made, due to the curse of dimensionality, which ties into the fact that non-parametric approaches often perform poorly when the number of features (p) is large compared to the number of observations (n).",
+        "refused": false,
+        "attempts": 2,
+        "llm_calls": 7,
+        "latency_s": 82.71,
+        "wall_time_s": 82.82,
+        "confidence": 1.0,
+        "used_retrieval": true,
+        "keyword_score": 0.25,
+        "semantic_similarity": 0.485,
+        "semantic_pass": false,
+        "correct": false,
+        "possible_label_issue": false
+      }
+    }
+  },
+  {
+    "id": "q31",
+    "question": "What is a hyperplane?",
+    "answerable": true,
+    "reference_answer": "In a p-dimensional space, a hyperplane is a flat affine subspace of dimension p \u2212 1.",
+    "results": {
+      "baseline": {
+        "answer": "A hyperplane is a flat affine subspace of hyperplane dimension p \u2212 1 in a p-dimensional space.",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 1,
+        "latency_s": 13.54,
+        "wall_time_s": 13.64,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": 1.0,
+        "semantic_similarity": 0.988,
+        "semantic_pass": true,
+        "correct": true,
+        "possible_label_issue": false
+      },
+      "self_rag": {
+        "answer": "A hyperplane is a flat affine subspace of hyperplane dimension p \u2212 1 in a p-dimensional space. [1]",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 3,
+        "latency_s": 48.13,
+        "wall_time_s": 48.19,
+        "confidence": 1.0,
+        "used_retrieval": true,
+        "keyword_score": 1.0,
+        "semantic_similarity": 0.985,
+        "semantic_pass": true,
+        "correct": true,
+        "possible_label_issue": false
+      }
+    }
+  },
+  {
+    "id": "q32",
+    "question": "What is bagging and what problem does it address?",
+    "answerable": true,
+    "reference_answer": "Bagging (bootstrap aggregation) is a general-purpose procedure for reducing the variance of a statistical learning method, especially decision trees, by averaging predictions from many bootstrapped training sets.",
+    "results": {
+      "baseline": {
+        "answer": "Bagging is a procedure that combines multiple decision trees to improve the accuracy of a model. It addresses the problem of high variance in decision trees, which can lead to different results when applied to different data sets.",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 1,
+        "latency_s": 13.42,
+        "wall_time_s": 13.49,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": 0.5,
+        "semantic_similarity": 0.775,
+        "semantic_pass": true,
+        "correct": true,
+        "possible_label_issue": false
+      },
+      "self_rag": {
+        "answer": "Bagging is a procedure that combines multiple decision trees to improve the accuracy of a model. It addresses the problem of high variance in decision trees, which can lead to different results when applied to different data sets.",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 3,
+        "latency_s": 32.69,
+        "wall_time_s": 32.74,
+        "confidence": 1.0,
+        "used_retrieval": true,
+        "keyword_score": 0.5,
+        "semantic_similarity": 0.775,
+        "semantic_pass": true,
+        "correct": true,
+        "possible_label_issue": false
+      }
+    }
+  },
+  {
+    "id": "q33",
+    "question": "How do random forests improve on bagged trees?",
+    "answerable": true,
+    "reference_answer": "They decorrelate the trees: at each split only a random sample of m predictors out of p is considered as split candidates, typically m \u2248 \u221ap.",
+    "results": {
+      "baseline": {
+        "answer": "Random forests improve on bagged trees by forcing each split to consider only a subset of the predictors, thereby decorrelating the trees and making the average of the resulting trees less variable and hence more reliable.",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 1,
+        "latency_s": 15.61,
+        "wall_time_s": 15.68,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": 0.5,
+        "semantic_similarity": 0.443,
+        "semantic_pass": false,
+        "correct": false,
+        "possible_label_issue": false
+      },
+      "self_rag": {
+        "answer": "Random forests improve on bagged trees by forcing each split to consider only a subset of the predictors, thereby decorrelating the trees and making the average of the resulting trees less variable and hence more reliable.",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 3,
+        "latency_s": 33.4,
+        "wall_time_s": 33.46,
+        "confidence": 1.0,
+        "used_retrieval": true,
+        "keyword_score": 0.5,
+        "semantic_similarity": 0.443,
+        "semantic_pass": false,
+        "correct": false,
+        "possible_label_issue": false
+      }
+    }
+  },
+  {
+    "id": "q34",
+    "question": "How does boosting differ from bagging?",
+    "answerable": true,
+    "reference_answer": "In boosting the trees are grown sequentially, each using information from previously grown trees and fit to a modified version of the data, with no bootstrap sampling.",
+    "results": {
+      "baseline": {
+        "answer": "Boosting learns slowly, fitting a decision tree to the residuals from the current model, whereas bagging fits a separate decision tree to each copy of the original training data set using the bootstrap.",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 1,
+        "latency_s": 12.43,
+        "wall_time_s": 12.52,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": 0.5,
+        "semantic_similarity": 0.63,
+        "semantic_pass": true,
+        "correct": true,
+        "possible_label_issue": false
+      },
+      "self_rag": {
+        "answer": "Boosting learns slowly, fitting a decision tree to the residuals from the current model, whereas bagging fits a separate decision tree to each copy of the original training data set using the bootstrap.",
+        "refused": false,
+        "attempts": 3,
+        "llm_calls": 11,
+        "latency_s": 91.92,
+        "wall_time_s": 92.01,
+        "confidence": 1.0,
+        "used_retrieval": true,
+        "keyword_score": 0.5,
+        "semantic_similarity": 0.63,
+        "semantic_pass": true,
+        "correct": true,
+        "possible_label_issue": false
+      }
+    }
+  },
+  {
+    "id": "q35",
+    "question": "What is the first principal component of a set of features?",
+    "answerable": true,
+    "reference_answer": "It is the normalized linear combination of the features, with squared loadings summing to one, that has the largest variance.",
+    "results": {
+      "baseline": {
+        "answer": "The first principal component of a set of features X1,X2,...,Xp is the normalized linear combination of the features Z1=\u03c611X1+\u03c621X2+\u00b7\u00b7\u00b7 +\u03c6p1Xp that has the largest variance, where \u03c611,...,\u03c6p1 are the loadings of the first principal component.",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 1,
+        "latency_s": 13.72,
+        "wall_time_s": 13.82,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": 1.0,
+        "semantic_similarity": 0.664,
+        "semantic_pass": true,
+        "correct": true,
+        "possible_label_issue": false
+      },
+      "self_rag": {
+        "answer": "The first principal component of a set of features X1,X2,...,Xp is the normalized linear combination of the features Z1=\u03c611X1+\u03c621X2+\u00b7\u00b7\u00b7 +\u03c6p1Xp that has the largest variance, where the elements \u03c611,...,\u03c6p1 are the loadings of the first principal component, and are constrained so that their sum of squares is equal to one.",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 3,
+        "latency_s": 37.76,
+        "wall_time_s": 37.82,
+        "confidence": 1.0,
+        "used_retrieval": true,
+        "keyword_score": 1.0,
+        "semantic_similarity": 0.68,
+        "semantic_pass": true,
+        "correct": true,
+        "possible_label_issue": false
+      }
+    }
+  },
+  {
+    "id": "q36",
+    "question": "What does K-means clustering do?",
+    "answerable": true,
+    "reference_answer": "It partitions a data set into K distinct, non-overlapping clusters, assigning each observation to exactly one of the K clusters, where K is specified in advance.",
+    "results": {
+      "baseline": {
+        "answer": "K-means clustering is a simple and elegant approach for partitioning a data set into K distinct, non-overlapping clusters.",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 1,
+        "latency_s": 12.46,
+        "wall_time_s": 12.52,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": 1.0,
+        "semantic_similarity": 0.672,
+        "semantic_pass": true,
+        "correct": true,
+        "possible_label_issue": false
+      },
+      "self_rag": {
+        "answer": "K-means clustering is a simple and elegant approach for partitioning a data set into K distinct, non-overlapping clusters. It assigns each observation to exactly one of the K clusters.",
+        "refused": false,
+        "attempts": 2,
+        "llm_calls": 7,
+        "latency_s": 65.61,
+        "wall_time_s": 65.68,
+        "confidence": 1.0,
+        "used_retrieval": true,
+        "keyword_score": 1.0,
+        "semantic_similarity": 0.738,
+        "semantic_pass": true,
+        "correct": true,
+        "possible_label_issue": false
+      }
+    }
+  },
+  {
+    "id": "q37",
+    "question": "What is censoring in survival analysis?",
+    "answerable": true,
+    "reference_answer": "Censoring occurs when the event time is not fully observed, for example when a patient drops out or the study ends; we observe Y = min(T, C), the survival or censoring time, plus a status indicator.",
+    "results": {
+      "baseline": {
+        "answer": "Censoring in survival analysis is the situation where the true survival time, T, is either unknown or not observed, and instead, the censoring time, C, is observed. This can occur when the event of interest (e.g., death, cancellation) has not occurred by the time of data collection, and the time at which censoring occurs is recorded instead. [1]",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 1,
+        "latency_s": 15.7,
+        "wall_time_s": 15.78,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": 0.5,
+        "semantic_similarity": 0.818,
+        "semantic_pass": true,
+        "correct": true,
+        "possible_label_issue": false
+      },
+      "self_rag": {
+        "answer": "Censoring in survival analysis is the situation where the true survival time, T, is either unknown or not observed, and instead, the censoring time, C, is observed. This can occur when the event of interest (e.g., death, cancellation) has not occurred by the time of data collection, and the time at which censoring occurs is recorded instead. [1]",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 3,
+        "latency_s": 36.81,
+        "wall_time_s": 36.88,
+        "confidence": 1.0,
+        "used_retrieval": true,
+        "keyword_score": 0.5,
+        "semantic_similarity": 0.818,
+        "semantic_pass": true,
+        "correct": true,
+        "possible_label_issue": false
+      }
+    }
+  },
+  {
+    "id": "q38",
+    "question": "What is the family-wise error rate (FWER)?",
+    "answerable": true,
+    "reference_answer": "The FWER is the probability of making at least one Type I error when testing m null hypotheses.",
+    "results": {
+      "baseline": {
+        "answer": "The family-wise error rate (FWER) is the probability of making at least one Type I error when testing m null hypotheses.",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 1,
+        "latency_s": 13.72,
+        "wall_time_s": 13.75,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": 1.0,
+        "semantic_similarity": 0.812,
+        "semantic_pass": true,
+        "correct": true,
+        "possible_label_issue": false
+      },
+      "self_rag": {
+        "answer": "The family-wise error rate (FWER) is the probability of making at least one Type I error when testing m null hypotheses.",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 3,
+        "latency_s": 33.24,
+        "wall_time_s": 33.27,
+        "confidence": 1.0,
+        "used_retrieval": true,
+        "keyword_score": 1.0,
+        "semantic_similarity": 0.812,
+        "semantic_pass": true,
+        "correct": true,
+        "possible_label_issue": false
+      }
+    }
+  },
+  {
+    "id": "q39",
+    "question": "How does Holm's method compare with the Bonferroni method?",
+    "answerable": true,
+    "reference_answer": "Both control the FWER, but Holm's step-down procedure is less conservative, rejecting more null hypotheses and giving greater power with fewer Type II errors.",
+    "results": {
+      "baseline": {
+        "answer": "Holm's method is less conservative than the Bonferroni method, in the sense that it will reject more null hypotheses, typically resulting in fewer Type II errors and hence greater power.",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 1,
+        "latency_s": 11.6,
+        "wall_time_s": 11.62,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": 1.0,
+        "semantic_similarity": 0.703,
+        "semantic_pass": true,
+        "correct": true,
+        "possible_label_issue": false
+      },
+      "self_rag": {
+        "answer": "Holm's method is less conservative than the Bonferroni method, in the sense that it will reject more null hypotheses, typically resulting in fewer Type II errors and hence greater power.",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 3,
+        "latency_s": 29.62,
+        "wall_time_s": 29.69,
+        "confidence": 1.0,
+        "used_retrieval": true,
+        "keyword_score": 1.0,
+        "semantic_similarity": 0.703,
+        "semantic_pass": true,
+        "correct": true,
+        "possible_label_issue": false
+      }
+    }
+  },
+  {
+    "id": "q40",
+    "question": "What do convolution layers and pooling layers do in a convolutional neural network?",
+    "answerable": true,
+    "reference_answer": "Convolution layers search for instances of small patterns in the image, while pooling layers downsample these to select a prominent subset.",
+    "results": {
+      "baseline": {
+        "answer": "Convolution layers and pooling layers are two types of layers in a convolutional neural network. Convolution layers transform the input volume into an output volume through a differentiable function, producing a 2-dimensional activation map for each filter. Pooling layers reduce the dimensions of data by combining the outputs of neuron clusters, resulting in a single neuron in the next layer, and grant a degree of local translational invariance to the features contained therein, allowing the CNN to be more robust to variations in their positions.",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 1,
+        "latency_s": 17.39,
+        "wall_time_s": 17.45,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": 0.5,
+        "semantic_similarity": 0.59,
+        "semantic_pass": true,
+        "correct": true,
+        "possible_label_issue": false
+      },
+      "self_rag": {
+        "answer": "Convolution layers and pooling layers are two types of layers in a convolutional neural network. Convolution layers transform the input volume into an output volume through a differentiable function, producing a 2-dimensional activation map for each filter. Pooling layers reduce the dimensions of data by combining the outputs of neuron clusters, resulting in a single neuron in the next layer, and grant a degree of local translational invariance to the features contained therein, allowing the CNN to be more robust to variations in their positions.",
+        "refused": false,
+        "attempts": 3,
+        "llm_calls": 11,
+        "latency_s": 130.29,
+        "wall_time_s": 130.42,
+        "confidence": 1.0,
+        "used_retrieval": true,
+        "keyword_score": 0.5,
+        "semantic_similarity": 0.59,
+        "semantic_pass": true,
+        "correct": true,
+        "possible_label_issue": false
+      }
+    }
+  },
+  {
+    "id": "q41",
+    "question": "What is the population of India?",
+    "answerable": false,
+    "reference_answer": null,
+    "results": {
+      "baseline": {
+        "answer": "I can answer the question based on the provided context.\n\nFor question [5], the correct answer is: a bacterial population in the bloodstream.\n\nFor question [4], the answer is not explicitly stated, but it is mentioned that 95% of the confidence intervals for the average sales will contain the true value of average sales.\n\nFor question [3], the accuracy scores for different metrics are provided, but the question is not answered.\n\nFor question [2], the answer is not explicitly stated.\n\nFor question [1], the answer is not explicitly stated.",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 1,
+        "latency_s": 20.55,
+        "wall_time_s": 20.65,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": null,
+        "semantic_similarity": 0.0,
+        "semantic_pass": false,
+        "correct": false,
+        "possible_label_issue": false
+      },
+      "self_rag": {
+        "answer": "I don't have enough information in the provided documents to answer this.",
+        "refused": true,
+        "attempts": 1,
+        "llm_calls": 2,
+        "latency_s": 23.25,
+        "wall_time_s": 23.33,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": null,
+        "semantic_similarity": 0.0,
+        "semantic_pass": false,
+        "correct": true,
+        "possible_label_issue": false
+      }
+    }
+  },
+  {
+    "id": "q42",
+    "question": "What is the price of an NVIDIA H100 GPU?",
+    "answerable": false,
+    "reference_answer": null,
+    "results": {
+      "baseline": {
+        "answer": "I don't have enough information in the provided documents to answer this.",
+        "refused": true,
+        "attempts": 1,
+        "llm_calls": 1,
+        "latency_s": 12.7,
+        "wall_time_s": 12.75,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": null,
+        "semantic_similarity": 0.0,
+        "semantic_pass": false,
+        "correct": true,
+        "possible_label_issue": false
+      },
+      "self_rag": {
+        "answer": "I don't have enough information in the provided documents to answer this.",
+        "refused": true,
+        "attempts": 3,
+        "llm_calls": 5,
+        "latency_s": 36.72,
+        "wall_time_s": 36.75,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": null,
+        "semantic_similarity": 0.0,
+        "semantic_pass": false,
+        "correct": true,
+        "possible_label_issue": false
+      }
+    }
+  },
+  {
+    "id": "q43",
+    "question": "Which company released GPT-4?",
+    "answerable": false,
+    "reference_answer": null,
+    "results": {
+      "baseline": {
+        "answer": "OpenAI released GPT-4.",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 1,
+        "latency_s": 9.77,
+        "wall_time_s": 9.84,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": null,
+        "semantic_similarity": 0.0,
+        "semantic_pass": false,
+        "correct": false,
+        "possible_label_issue": false
+      },
+      "self_rag": {
+        "answer": "OpenAI released the 2023 GPT-4.",
+        "refused": false,
+        "attempts": 3,
+        "llm_calls": 9,
+        "latency_s": 44.44,
+        "wall_time_s": 44.47,
+        "confidence": 1.0,
+        "used_retrieval": true,
+        "keyword_score": null,
+        "semantic_similarity": 0.0,
+        "semantic_pass": false,
+        "correct": false,
+        "possible_label_issue": false
+      }
+    }
+  },
+  {
+    "id": "q44",
+    "question": "What is the default learning rate in XGBoost?",
+    "answerable": false,
+    "reference_answer": null,
+    "results": {
+      "baseline": {
+        "answer": "I don't have enough information in the provided documents to answer this.",
+        "refused": true,
+        "attempts": 1,
+        "llm_calls": 1,
+        "latency_s": 11.01,
+        "wall_time_s": 11.07,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": null,
+        "semantic_similarity": 0.0,
+        "semantic_pass": false,
+        "correct": true,
+        "possible_label_issue": false
+      },
+      "self_rag": {
+        "answer": "I don't have enough information in the provided documents to answer this.",
+        "refused": true,
+        "attempts": 1,
+        "llm_calls": 2,
+        "latency_s": 18.95,
+        "wall_time_s": 18.97,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": null,
+        "semantic_similarity": 0.0,
+        "semantic_pass": false,
+        "correct": true,
+        "possible_label_issue": false
+      }
+    }
+  },
+  {
+    "id": "q45",
+    "question": "Who won the most recent FIFA World Cup?",
+    "answerable": false,
+    "reference_answer": null,
+    "results": {
+      "baseline": {
+        "answer": "I don't have enough information in the provided documents to answer this.",
+        "refused": true,
+        "attempts": 1,
+        "llm_calls": 1,
+        "latency_s": 16.21,
+        "wall_time_s": 16.23,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": null,
+        "semantic_similarity": 0.0,
+        "semantic_pass": false,
+        "correct": true,
+        "possible_label_issue": false
+      },
+      "self_rag": {
+        "answer": "I don't have enough information in the provided documents to answer this.",
+        "refused": true,
+        "attempts": 1,
+        "llm_calls": 2,
+        "latency_s": 24.96,
+        "wall_time_s": 25.01,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": null,
+        "semantic_similarity": 0.0,
+        "semantic_pass": false,
+        "correct": true,
+        "possible_label_issue": false
+      }
+    }
+  },
+  {
+    "id": "q46",
+    "question": "What is the capital city of Australia?",
+    "answerable": false,
+    "reference_answer": null,
+    "results": {
+      "baseline": {
+        "answer": "I don't have enough information in the provided documents to answer this.",
+        "refused": true,
+        "attempts": 1,
+        "llm_calls": 1,
+        "latency_s": 21.19,
+        "wall_time_s": 21.22,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": null,
+        "semantic_similarity": 0.0,
+        "semantic_pass": false,
+        "correct": true,
+        "possible_label_issue": false
+      },
+      "self_rag": {
+        "answer": "I don't have enough information in the provided documents to answer this.",
+        "refused": true,
+        "attempts": 1,
+        "llm_calls": 2,
+        "latency_s": 28.76,
+        "wall_time_s": 28.83,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": null,
+        "semantic_similarity": 0.0,
+        "semantic_pass": false,
+        "correct": true,
+        "possible_label_issue": false
+      }
+    }
+  },
+  {
+    "id": "q47",
+    "question": "How many parameters does the Llama 2 70B model have?",
+    "answerable": false,
+    "reference_answer": null,
+    "results": {
+      "baseline": {
+        "answer": "The Llama 2 70B model has 70 billion parameters.",
+        "refused": false,
+        "attempts": 1,
+        "llm_calls": 1,
+        "latency_s": 12.16,
+        "wall_time_s": 12.23,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": null,
+        "semantic_similarity": 0.0,
+        "semantic_pass": false,
+        "correct": false,
+        "possible_label_issue": false
+      },
+      "self_rag": {
+        "answer": "The Llama 2 70B model has 70 billion parameters.",
+        "refused": false,
+        "attempts": 3,
+        "llm_calls": 11,
+        "latency_s": 48.97,
+        "wall_time_s": 49.0,
+        "confidence": 0.5,
+        "used_retrieval": true,
+        "keyword_score": null,
+        "semantic_similarity": 0.0,
+        "semantic_pass": false,
+        "correct": false,
+        "possible_label_issue": false
+      }
+    }
+  },
+  {
+    "id": "q48",
+    "question": "What is the recommended chunk size for a FAISS index?",
+    "answerable": false,
+    "reference_answer": null,
+    "results": {
+      "baseline": {
+        "answer": "I don't have enough information in the provided documents to answer this.",
+        "refused": true,
+        "attempts": 1,
+        "llm_calls": 1,
+        "latency_s": 13.55,
+        "wall_time_s": 13.61,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": null,
+        "semantic_similarity": 0.0,
+        "semantic_pass": false,
+        "correct": true,
+        "possible_label_issue": false
+      },
+      "self_rag": {
+        "answer": "I don't have enough information in the provided documents to answer this.",
+        "refused": true,
+        "attempts": 3,
+        "llm_calls": 5,
+        "latency_s": 48.43,
+        "wall_time_s": 48.46,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": null,
+        "semantic_similarity": 0.0,
+        "semantic_pass": false,
+        "correct": true,
+        "possible_label_issue": false
+      }
+    }
+  },
+  {
+    "id": "q49",
+    "question": "What is the current price of Bitcoin?",
+    "answerable": false,
+    "reference_answer": null,
+    "results": {
+      "baseline": {
+        "answer": "I don't have enough information in the provided documents to answer this.",
+        "refused": true,
+        "attempts": 1,
+        "llm_calls": 1,
+        "latency_s": 12.13,
+        "wall_time_s": 12.2,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": null,
+        "semantic_similarity": 0.0,
+        "semantic_pass": false,
+        "correct": true,
+        "possible_label_issue": false
+      },
+      "self_rag": {
+        "answer": "I don't have enough information in the provided documents to answer this.",
+        "refused": true,
+        "attempts": 2,
+        "llm_calls": 4,
+        "latency_s": 31.89,
+        "wall_time_s": 31.92,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": null,
+        "semantic_similarity": 0.0,
+        "semantic_pass": false,
+        "correct": true,
+        "possible_label_issue": false
+      }
+    }
+  },
+  {
+    "id": "q50",
+    "question": "What was the BLEU score of Self-RAG on the WMT 2014 English-to-German task?",
+    "answerable": false,
+    "reference_answer": null,
+    "results": {
+      "baseline": {
+        "answer": "I don't have enough information in the provided documents to answer this.",
+        "refused": true,
+        "attempts": 1,
+        "llm_calls": 1,
+        "latency_s": 18.06,
+        "wall_time_s": 18.12,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": null,
+        "semantic_similarity": 0.0,
+        "semantic_pass": false,
+        "correct": true,
+        "possible_label_issue": false
+      },
+      "self_rag": {
+        "answer": "I don't have enough information in the provided documents to answer this.",
+        "refused": true,
+        "attempts": 1,
+        "llm_calls": 2,
+        "latency_s": 25.13,
+        "wall_time_s": 25.21,
+        "confidence": 0.0,
+        "used_retrieval": true,
+        "keyword_score": null,
+        "semantic_similarity": 0.0,
+        "semantic_pass": false,
+        "correct": true,
+        "possible_label_issue": false
+      }
+    }
+  }
+]

@@ -1,0 +1,544 @@
+[
+  {
+    "id": "q1",
+    "question": "What is Self-RAG?",
+    "answerable": true,
+    "reference_answer": "Self-RAG is a framework that trains a language model to retrieve passages on demand and to reflect on the retrieved evidence and its own generations using special reflection tokens.",
+    "keywords": [
+      "self-rag",
+      "retrieval",
+      "reflection"
+    ]
+  },
+  {
+    "id": "q2",
+    "question": "What are reflection tokens in Self-RAG?",
+    "answerable": true,
+    "reference_answer": "Reflection tokens are special tokens added to the model's vocabulary that the model generates to decide whether to retrieve and to critique retrieved passages and its own output.",
+    "keywords": [
+      "reflection tokens",
+      "critique",
+      "retrieve"
+    ]
+  },
+  {
+    "id": "q3",
+    "question": "What are the four types of reflection tokens used in Self-RAG?",
+    "answerable": true,
+    "reference_answer": "Retrieve, IsRel (relevance), IsSup (support), and IsUse (utility).",
+    "keywords": [
+      "retrieve",
+      "isrel",
+      "issup",
+      "isuse"
+    ]
+  },
+  {
+    "id": "q4",
+    "question": "What does the Retrieve token decide in Self-RAG?",
+    "answerable": true,
+    "reference_answer": "It decides whether retrieval is needed for the current segment, with outputs such as yes, no, or continue.",
+    "keywords": [
+      "retrieve",
+      "whether",
+      "yes",
+      "no"
+    ]
+  },
+  {
+    "id": "q5",
+    "question": "What does the IsRel token evaluate in Self-RAG?",
+    "answerable": true,
+    "reference_answer": "It evaluates whether a retrieved passage is relevant to the input query.",
+    "keywords": [
+      "isrel",
+      "relevant",
+      "passage"
+    ]
+  },
+  {
+    "id": "q6",
+    "question": "What does the IsSup token evaluate in Self-RAG?",
+    "answerable": true,
+    "reference_answer": "It evaluates whether the generated response is supported by the retrieved passage, such as fully supported, partially supported, or not supported.",
+    "keywords": [
+      "issup",
+      "supported",
+      "generation"
+    ]
+  },
+  {
+    "id": "q7",
+    "question": "What does the IsUse token evaluate in Self-RAG?",
+    "answerable": true,
+    "reference_answer": "It rates the overall usefulness of the generated response to the query, on a scale of 1 to 5.",
+    "keywords": [
+      "isuse",
+      "useful",
+      "1",
+      "5"
+    ]
+  },
+  {
+    "id": "q8",
+    "question": "What is the role of the critic model in Self-RAG training?",
+    "answerable": true,
+    "reference_answer": "The critic model is trained to produce reflection tokens and is used to annotate the training corpus offline, so the generator can learn to emit reflection tokens without a critic at inference time.",
+    "keywords": [
+      "critic",
+      "training",
+      "reflection tokens",
+      "offline"
+    ]
+  },
+  {
+    "id": "q9",
+    "question": "How does Self-RAG differ from standard RAG in when it retrieves?",
+    "answerable": true,
+    "reference_answer": "Standard RAG retrieves a fixed number of passages for every query, whereas Self-RAG retrieves adaptively, only when the model decides retrieval is helpful.",
+    "keywords": [
+      "on demand",
+      "fixed",
+      "adaptive",
+      "retrieve"
+    ]
+  },
+  {
+    "id": "q10",
+    "question": "How can Self-RAG's behavior be customized at inference time?",
+    "answerable": true,
+    "reference_answer": "By using reflection tokens to control decoding, such as weighting the critique token probabilities in segment-level beam search or setting thresholds for retrieval, without retraining.",
+    "keywords": [
+      "inference",
+      "reflection tokens",
+      "beam search",
+      "customiz"
+    ]
+  },
+  {
+    "id": "q11",
+    "question": "What are the three desiderata considered when motivating self-attention?",
+    "answerable": true,
+    "reference_answer": "They are total computational complexity per layer, the amount of computation that can be parallelized, and the path length between long-range dependencies.",
+    "keywords": [
+      "computational complexity",
+      "parallelized",
+      "long-range"
+    ]
+  },
+  {
+    "id": "q12",
+    "question": "What is scaled dot-product attention?",
+    "answerable": true,
+    "reference_answer": "It computes attention as softmax(QK^T / sqrt(d_k)) V, where the dot products of queries and keys are scaled by the square root of the key dimension.",
+    "keywords": [
+      "softmax",
+      "query",
+      "key",
+      "sqrt",
+      "d_k"
+    ]
+  },
+  {
+    "id": "q13",
+    "question": "Why are the dot products scaled by the square root of d_k in the Transformer?",
+    "answerable": true,
+    "reference_answer": "For large d_k the dot products grow large in magnitude, pushing the softmax into regions with extremely small gradients, so scaling counteracts this.",
+    "keywords": [
+      "large",
+      "softmax",
+      "gradient",
+      "scal"
+    ]
+  },
+  {
+    "id": "q14",
+    "question": "What is multi-head attention and why is it used?",
+    "answerable": true,
+    "reference_answer": "Multi-head attention runs several attention functions in parallel on different learned linear projections of queries, keys and values, letting the model attend to information from different representation subspaces at different positions.",
+    "keywords": [
+      "multi-head",
+      "parallel",
+      "projections",
+      "subspaces"
+    ]
+  },
+  {
+    "id": "q15",
+    "question": "Why does the Transformer need positional encodings?",
+    "answerable": true,
+    "reference_answer": "The model has no recurrence or convolution, so positional encodings, using sine and cosine functions of different frequencies, inject information about the order of tokens in the sequence.",
+    "keywords": [
+      "positional",
+      "order",
+      "sine",
+      "cosine"
+    ]
+  },
+  {
+    "id": "q16",
+    "question": "What is CRAG?",
+    "answerable": true,
+    "reference_answer": "CRAG (Corrective Retrieval Augmented Generation) is a method that adds a lightweight retrieval evaluator to judge the quality of retrieved documents and triggers corrective actions to improve the robustness of generation.",
+    "keywords": [
+      "corrective",
+      "retrieval evaluator",
+      "robust"
+    ]
+  },
+  {
+    "id": "q17",
+    "question": "What is the role of the retrieval evaluator in CRAG?",
+    "answerable": true,
+    "reference_answer": "It is a lightweight model that estimates the relevance of retrieved documents to the query and produces a confidence score used to trigger one of the corrective actions.",
+    "keywords": [
+      "evaluator",
+      "confidence",
+      "relevance",
+      "lightweight"
+    ]
+  },
+  {
+    "id": "q18",
+    "question": "What are the three actions CRAG can trigger based on the retrieval evaluator's confidence?",
+    "answerable": true,
+    "reference_answer": "Correct, Incorrect, and Ambiguous.",
+    "keywords": [
+      "correct",
+      "incorrect",
+      "ambiguous"
+    ]
+  },
+  {
+    "id": "q19",
+    "question": "What is the decompose-then-recompose algorithm in CRAG?",
+    "answerable": true,
+    "reference_answer": "Retrieved documents are decomposed into fine-grained knowledge strips, irrelevant strips are filtered out using the evaluator's scores, and the relevant strips are recomposed into refined knowledge.",
+    "keywords": [
+      "decompose",
+      "recompose",
+      "knowledge strips",
+      "filter"
+    ]
+  },
+  {
+    "id": "q20",
+    "question": "What does CRAG do when the retrieved documents are judged Incorrect?",
+    "answerable": true,
+    "reference_answer": "It discards the retrieved documents and falls back to large-scale web search to obtain corrective knowledge.",
+    "keywords": [
+      "incorrect",
+      "web search",
+      "discard"
+    ]
+  },
+  {
+    "id": "q21",
+    "question": "What is the bias-variance trade-off?",
+    "answerable": true,
+    "reference_answer": "Good test performance requires both low variance and low squared bias; it is easy to get very low bias with high variance (a curve through every training point) or low variance with high bias (a horizontal line), so the challenge is finding a method with both low.",
+    "keywords": [
+      "bias",
+      "variance",
+      "test",
+      "trade-off"
+    ]
+  },
+  {
+    "id": "q22",
+    "question": "What is overfitting?",
+    "answerable": true,
+    "reference_answer": "Overfitting is the phenomenon where a model follows the errors, or noise, in the training data too closely.",
+    "keywords": [
+      "overfitting",
+      "noise",
+      "errors",
+      "training"
+    ]
+  },
+  {
+    "id": "q23",
+    "question": "What does the least squares approach choose the coefficients to minimize?",
+    "answerable": true,
+    "reference_answer": "It chooses the coefficient estimates that minimize the residual sum of squares (RSS).",
+    "keywords": [
+      "least squares",
+      "rss",
+      "residual sum of squares",
+      "minimize"
+    ]
+  },
+  {
+    "id": "q24",
+    "question": "How is the R² statistic defined?",
+    "answerable": true,
+    "reference_answer": "R² = (TSS − RSS) / TSS = 1 − RSS/TSS, the proportion of variance explained, which takes a value between 0 and 1 and is independent of the scale of Y.",
+    "keywords": [
+      "r2",
+      "tss",
+      "rss",
+      "proportion of variance"
+    ]
+  },
+  {
+    "id": "q25",
+    "question": "What does the ridge regression penalty add to the RSS?",
+    "answerable": true,
+    "reference_answer": "It adds λ times the sum of the squared coefficients (a shrinkage penalty), where λ ≥ 0 is a tuning parameter.",
+    "keywords": [
+      "ridge",
+      "λ",
+      "squared",
+      "shrinkage"
+    ]
+  },
+  {
+    "id": "q26",
+    "question": "How does the lasso penalty differ from the ridge penalty?",
+    "answerable": true,
+    "reference_answer": "The lasso replaces the squared coefficient term βj² in the ridge penalty with the absolute value |βj|.",
+    "keywords": [
+      "lasso",
+      "absolute",
+      "|βj|",
+      "ridge"
+    ]
+  },
+  {
+    "id": "q27",
+    "question": "What values of k are typically used in k-fold cross-validation, and why?",
+    "answerable": true,
+    "reference_answer": "Typically k = 5 or k = 10, since these values have been shown empirically to give test error estimates that suffer neither from excessively high bias nor from very high variance.",
+    "keywords": [
+      "k = 5",
+      "k = 10",
+      "bias",
+      "variance"
+    ]
+  },
+  {
+    "id": "q28",
+    "question": "What is the Bayes classifier in a two-class problem?",
+    "answerable": true,
+    "reference_answer": "It assigns each observation to the most likely class given its predictor values, predicting class one if Pr(Y = 1 | X = x0) > 0.5 and class two otherwise.",
+    "keywords": [
+      "bayes classifier",
+      "0.5",
+      "most likely class",
+      "conditional probability"
+    ]
+  },
+  {
+    "id": "q29",
+    "question": "What is the logistic function used in logistic regression?",
+    "answerable": true,
+    "reference_answer": "p(X) = e^(β0 + β1X) / (1 + e^(β0 + β1X)), fit using maximum likelihood.",
+    "keywords": [
+      "logistic",
+      "e",
+      "maximum likelihood",
+      "p(x)"
+    ]
+  },
+  {
+    "id": "q30",
+    "question": "What is the curse of dimensionality?",
+    "answerable": true,
+    "reference_answer": "When p is large, the K observations nearest to a test observation may be very far away in p-dimensional space, giving a poor KNN fit.",
+    "keywords": [
+      "curse of dimensionality",
+      "nearest",
+      "far",
+      "p-dimensional"
+    ]
+  },
+  {
+    "id": "q31",
+    "question": "What is a hyperplane?",
+    "answerable": true,
+    "reference_answer": "In a p-dimensional space, a hyperplane is a flat affine subspace of dimension p − 1.",
+    "keywords": [
+      "hyperplane",
+      "flat affine subspace",
+      "p − 1"
+    ]
+  },
+  {
+    "id": "q32",
+    "question": "What is bagging and what problem does it address?",
+    "answerable": true,
+    "reference_answer": "Bagging (bootstrap aggregation) is a general-purpose procedure for reducing the variance of a statistical learning method, especially decision trees, by averaging predictions from many bootstrapped training sets.",
+    "keywords": [
+      "bagging",
+      "bootstrap",
+      "variance",
+      "averag"
+    ]
+  },
+  {
+    "id": "q33",
+    "question": "How do random forests improve on bagged trees?",
+    "answerable": true,
+    "reference_answer": "They decorrelate the trees: at each split only a random sample of m predictors out of p is considered as split candidates, typically m ≈ √p.",
+    "keywords": [
+      "random forest",
+      "decorrelate",
+      "m",
+      "√p"
+    ]
+  },
+  {
+    "id": "q34",
+    "question": "How does boosting differ from bagging?",
+    "answerable": true,
+    "reference_answer": "In boosting the trees are grown sequentially, each using information from previously grown trees and fit to a modified version of the data, with no bootstrap sampling.",
+    "keywords": [
+      "boosting",
+      "sequential",
+      "previously grown",
+      "bootstrap"
+    ]
+  },
+  {
+    "id": "q35",
+    "question": "What is the first principal component of a set of features?",
+    "answerable": true,
+    "reference_answer": "It is the normalized linear combination of the features, with squared loadings summing to one, that has the largest variance.",
+    "keywords": [
+      "principal component",
+      "normalized",
+      "linear combination",
+      "largest variance"
+    ]
+  },
+  {
+    "id": "q36",
+    "question": "What does K-means clustering do?",
+    "answerable": true,
+    "reference_answer": "It partitions a data set into K distinct, non-overlapping clusters, assigning each observation to exactly one of the K clusters, where K is specified in advance.",
+    "keywords": [
+      "k-means",
+      "partition",
+      "k",
+      "non-overlapping"
+    ]
+  },
+  {
+    "id": "q37",
+    "question": "What is censoring in survival analysis?",
+    "answerable": true,
+    "reference_answer": "Censoring occurs when the event time is not fully observed, for example when a patient drops out or the study ends; we observe Y = min(T, C), the survival or censoring time, plus a status indicator.",
+    "keywords": [
+      "censoring",
+      "survival time",
+      "min",
+      "status indicator"
+    ]
+  },
+  {
+    "id": "q38",
+    "question": "What is the family-wise error rate (FWER)?",
+    "answerable": true,
+    "reference_answer": "The FWER is the probability of making at least one Type I error when testing m null hypotheses.",
+    "keywords": [
+      "family-wise error rate",
+      "at least one",
+      "type i",
+      "m null hypotheses"
+    ]
+  },
+  {
+    "id": "q39",
+    "question": "How does Holm's method compare with the Bonferroni method?",
+    "answerable": true,
+    "reference_answer": "Both control the FWER, but Holm's step-down procedure is less conservative, rejecting more null hypotheses and giving greater power with fewer Type II errors.",
+    "keywords": [
+      "holm",
+      "bonferroni",
+      "less conservative",
+      "power"
+    ]
+  },
+  {
+    "id": "q40",
+    "question": "What do convolution layers and pooling layers do in a convolutional neural network?",
+    "answerable": true,
+    "reference_answer": "Convolution layers search for instances of small patterns in the image, while pooling layers downsample these to select a prominent subset.",
+    "keywords": [
+      "convolution",
+      "pooling",
+      "patterns",
+      "downsample"
+    ]
+  },
+  {
+    "id": "q41",
+    "question": "What is the population of India?",
+    "answerable": false,
+    "reference_answer": null,
+    "keywords": []
+  },
+  {
+    "id": "q42",
+    "question": "What is the price of an NVIDIA H100 GPU?",
+    "answerable": false,
+    "reference_answer": null,
+    "keywords": []
+  },
+  {
+    "id": "q43",
+    "question": "Which company released GPT-4?",
+    "answerable": false,
+    "reference_answer": null,
+    "keywords": []
+  },
+  {
+    "id": "q44",
+    "question": "What is the default learning rate in XGBoost?",
+    "answerable": false,
+    "reference_answer": null,
+    "keywords": []
+  },
+  {
+    "id": "q45",
+    "question": "Who won the most recent FIFA World Cup?",
+    "answerable": false,
+    "reference_answer": null,
+    "keywords": []
+  },
+  {
+    "id": "q46",
+    "question": "What is the capital city of Australia?",
+    "answerable": false,
+    "reference_answer": null,
+    "keywords": []
+  },
+  {
+    "id": "q47",
+    "question": "How many parameters does the Llama 2 70B model have?",
+    "answerable": false,
+    "reference_answer": null,
+    "keywords": []
+  },
+  {
+    "id": "q48",
+    "question": "What is the recommended chunk size for a FAISS index?",
+    "answerable": false,
+    "reference_answer": null,
+    "keywords": []
+  },
+  {
+    "id": "q49",
+    "question": "What is the current price of Bitcoin?",
+    "answerable": false,
+    "reference_answer": null,
+    "keywords": []
+  },
+  {
+    "id": "q50",
+    "question": "What was the BLEU score of Self-RAG on the WMT 2014 English-to-German task?",
+    "answerable": false,
+    "reference_answer": null,
+    "keywords": []
+  }
+]

@@ -1,0 +1,20 @@
+[
+  {
+    "question": "How many identical layers does the base Transformer encoder use?",
+    "reference_answer": "Six identical layers.",
+    "answerable": true,
+    "source": "attention_is_all_you_need"
+  },
+  {
+    "question": "What does the Self-RAG framework train a language model to generate besides text?",
+    "reference_answer": "Special reflection tokens that decide when to retrieve and critique retrieved passages and its own output.",
+    "answerable": true,
+    "source": "self_rag"
+  },
+  {
+    "question": "Who won the most recent FIFA World Cup?",
+    "reference_answer": "",
+    "answerable": false,
+    "source": ""
+  }
+]
