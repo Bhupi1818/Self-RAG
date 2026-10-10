@@ -1,99 +1,315 @@
-# 🔎 Self-Reflective RAG
+# Self-RAG: A Self-Correcting RAG Pipeline
 
-A retrieval-augmented generation system that **checks its own work**. Instead of retrieving and answering blindly, it
-decides whether to retrieve, grades every retrieved passage, verifies that its answer is supported claim-by-claim,
-rewrites the query when retrieval is weak, and **refuses to answer** when the documents don't contain the answer.
+A local-first Retrieval-Augmented Generation (RAG) project that
+retrieves evidence, filters passages for relevance, generates an answer,
+and checks whether the answer is supported by the retrieved context. If
+evidence is insufficient, the pipeline can rewrite the query and retry
+instead of presenting an unsupported answer as grounded.
 
-> Inspired by Self-RAG (Asai et al., 2023) and Corrective RAG (Yan et al., 2024), implemented as an explicit,
-> inspectable pipeline instead of fine-tuned reflection tokens.
+**Repository:**
+[Bhupi1818/Self-RAG](https://github.com/Bhupi1818/Self-RAG)
 
-![demo](docs/demo.gif) <!-- add your recorded GIF here -->
+> This project implements a practical self-reflective RAG workflow. It
+> is inspired by the broader idea of self-critique in RAG systems; it is
+> not a reproduction of the original trained SELF-RAG model.
 
-## Why this exists
+## Why this project?
 
-Plain RAG fails silently: irrelevant chunks get stuffed into the prompt and the model confidently hallucinates.
-This project adds four guardrails and **measures** what they buy (see [Results](#results)).
+A basic RAG system retrieves passages and passes them to a language
+model. It can fail when passages are irrelevant, the question is phrased
+differently from the source, or the answer contains claims the context
+does not support.
 
-## How it works
+This project adds explicit checks:
 
-```mermaid
+-   **Retrieve** candidate passages from the indexed knowledge base.
+-   **Grade** passage relevance to the question.
+-   **Generate** an answer using selected context.
+-   **Verify** whether the answer is supported and answers the question.
+-   **Rewrite and retry** when retrieval or verification is
+    insufficient.
+-   **Refuse when necessary** rather than claiming unsupported
+    information is certain.
+
+## Pipeline overview
+
+``` mermaid
 flowchart TD
-    Q[Question] --> R{Router: needs retrieval?}
-    R -- no --> D[Direct answer]
-    R -- yes --> RET[Retrieve top-k]
-    RET --> G[Grade each chunk]
-    G -- too few relevant --> RW[Rewrite query]
-    G -- enough relevant --> GEN[Generate with citations]
-    GEN --> V{Verify: claims supported?}
-    V -- yes --> A[Answer + sources + confidence]
-    V -- no --> RW
-    RW -- retries left --> RET
-    RW -- exhausted --> X[Graceful refusal]
+    A[User question] --> B[Route question]
+    B --> C[Retrieve candidate passages]
+    C --> D[Grade passage relevance]
+    D --> E{Enough relevant evidence?}
+    E -- No --> F[Rewrite search query]
+    F --> C
+    E -- Yes --> G[Generate answer from context]
+    G --> H[Verify support and answer quality]
+    H --> I{Supported and answers question?}
+    I -- Yes --> J[Return grounded answer]
+    I -- No, retry available --> F
+    I -- No, retries exhausted --> K[Return refusal / insufficient evidence]
 ```
 
-Details: [docs/PIPELINE.md](docs/PIPELINE.md) · [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
+Retries are bounded and configurable. Verification can reduce risk, but
+it does not guarantee that every answer is correct.
 
-## Quickstart
+## Features
 
-```bash
-git clone <your-repo-url> && cd self-rag
-python -m venv .venv && source .venv/bin/activate     # Windows: .venv\Scripts\activate
+-   Local retrieval with a Chroma vector database.
+-   Sentence-transformer embeddings
+    (`sentence-transformers/all-MiniLM-L6-v2` by default).
+-   Configurable LLM provider, including Ollama and Anthropic support in
+    the project code.
+-   Passage relevance grading before generation.
+-   Answer-support verification after generation.
+-   Query rewriting and bounded retries.
+-   FastAPI endpoint and Streamlit interface.
+-   Automated tests and evaluation scripts.
+
+## Tech stack
+
+  Component          Technology
+  ------------------ ----------------------------------
+  Language           Python
+  API                FastAPI, Uvicorn
+  UI                 Streamlit
+  Vector store       Chroma
+  Embeddings         Sentence Transformers
+  Local LLM option   Ollama (for example, `llama3.2`)
+  Tests              pytest
+
+## Quick start
+
+### Prerequisites
+
+-   Python 3.11
+-   Git
+-   An LLM provider configured for the project
+-   For local inference, [Ollama](https://ollama.com/) and a downloaded
+    model
+
+### 1. Clone the repository
+
+``` bash
+git clone https://github.com/Bhupi1818/Self-RAG.git
+cd Self-RAG
+```
+
+### 2. Create a virtual environment and install dependencies
+
+On macOS/Linux:
+
+``` bash
+python3.11 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
 pip install -r requirements.txt
-cp .env.example .env                                   # add ANTHROPIC_API_KEY (or use Ollama)
-
-python scripts/download_data.py --arxiv-curated --wikipedia   # ~16 papers + 15 Wikipedia pages
-python -m src.ingest --reset                                  # build the vector index
-
-streamlit run app/streamlit_app.py                     # UI with reasoning trace
-uvicorn api.main:app --reload                          # REST API on :8000
+pip install -r requirements-dev.txt
 ```
 
-Docker: `docker compose up --build` (API on :8000, UI on :8501).
+### 3. Configure environment variables
 
-## Example API call
-
-```bash
-curl -X POST localhost:8000/ask -H "Content-Type: application/json" \
-  -d '{"question": "How does Self-RAG decide when to retrieve?", "mode": "self_rag"}'
+``` bash
+cp .env.example .env
 ```
 
-Response fields: `answer`, `sources`, `confidence`, `attempts`, `refused`, `trace`, `llm_calls`, `latency_s`.
+Edit `.env` to match your setup. For a local Ollama configuration, the
+relevant values are typically:
+
+``` dotenv
+LLM_PROVIDER=ollama
+LLM_MODEL=llama3.2
+OLLAMA_HOST=http://localhost:11434
+EMBEDDING_MODEL=sentence-transformers/all-MiniLM-L6-v2
+CHROMA_DIR=chroma_db
+COLLECTION_NAME=self_rag_docs
+RAW_DIR=data/raw
+CHUNK_SIZE=250
+CHUNK_OVERLAP=40
+TOP_K=8
+MAX_RETRIES=1
+MIN_RELEVANT=1
+SUPPORT_THRESHOLD=0.8
+```
+
+Keep any additional variables in `.env.example`. That file is the source
+of truth for supported configuration. If using Ollama, start it and
+download the model:
+
+``` bash
+ollama pull llama3.2
+ollama list
+```
+
+For a hosted provider, configure its credentials locally in `.env`.
+Never commit API keys or passwords.
+
+### 4. Prepare the knowledge base
+
+Place the documents you want to query in the configured raw-data
+directory (`data/raw/`), then run:
+
+``` bash
+python -m src.ingest --reset
+```
+
+Ingestion chunks documents, creates embeddings, and builds the local
+Chroma index. The index is stored under `chroma_db/` by default and is
+intentionally excluded from Git.
+
+See [`docs/DATA.md`](docs/DATA.md) and [`docs/SETUP.md`](docs/SETUP.md)
+for project-specific details.
+
+### 5. Run the API
+
+``` bash
+make api
+```
+
+The development server is configured for `http://127.0.0.1:8000`.
+Interactive API documentation is available at
+<http://127.0.0.1:8000/docs>.
+
+### 6. Run the Streamlit interface
+
+In a second terminal, activate the virtual environment and run:
+
+``` bash
+streamlit run app/streamlit_app.py
+```
+
+## Example API request
+
+With the API running:
+
+``` bash
+curl -X POST "http://127.0.0.1:8000/ask" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "question": "Why are dot products scaled by the square root of d_k in the Transformer?",
+    "mode": "self_rag"
+  }'
+```
+
+Inspect the live response schema in Swagger UI (`/docs`) or
+[`docs/API.md`](docs/API.md), since fields can evolve. Answers depend on
+the material indexed in your knowledge base. A refusal or
+insufficient-evidence response is expected when the documents do not
+support an answer.
+
+## Tests
+
+Run:
+
+``` bash
+python -m pytest -q
+```
+
+The current development baseline has **14 passing tests**. Re-run the
+suite after changing pipeline behavior, prompts, configuration, or
+schemas.
 
 ## Evaluation
 
-```bash
-python eval/generate_testset.py --n 40     # builds eval/testset.json from your corpus
-python eval/run_eval.py                    # baseline vs self-reflective
+Evaluation utilities and assets are included:
+
+-   [`eval/testset.json`](eval/testset.json) --- test questions / cases.
+-   [`eval/benchmark.json`](eval/benchmark.json) --- benchmark input.
+-   [`eval/benchmark_results.json`](eval/benchmark_results.json) ---
+    stored results.
+-   [`eval/run_eval.py`](eval/run_eval.py) --- evaluation runner.
+-   [`eval/run_benchmark.py`](eval/run_benchmark.py) --- benchmark
+    runner.
+-   [`eval/generate_testset.py`](eval/generate_testset.py) --- test-set
+    generation utility.
+-   [`docs/EVALUATION.md`](docs/EVALUATION.md) --- methodology and
+    usage.
+
+Stored results apply to the run and configuration that produced them;
+they are not a performance guarantee for other models, corpora, or
+hardware.
+
+## Repository layout
+
+``` text
+.
+├── api/                 # FastAPI application
+├── app/                 # Streamlit interface
+├── data/                # Raw and processed data placeholders
+├── docs/                # Setup, API, architecture, and evaluation docs
+├── eval/                # Evaluation scripts and benchmark assets
+├── scripts/             # Data preparation utilities
+├── src/
+│   ├── config.py        # Environment configuration
+│   ├── ingest.py        # Document ingestion and indexing
+│   ├── retriever.py     # Retrieval
+│   ├── grader.py        # Passage relevance grading
+│   ├── generator.py     # Answer generation
+│   ├── verifier.py      # Answer-support verification
+│   ├── rewriter.py      # Query rewriting
+│   ├── router.py        # Question routing
+│   └── pipeline.py      # Pipeline orchestration
+├── tests/               # Automated tests
+├── .env.example         # Configuration template
+├── Makefile             # Common development commands
+└── requirements.txt     # Runtime dependencies
 ```
 
-### Results
+## Configuration reference
 
-<!-- Paste results/eval_table.md here after running. Only publish numbers you measured. -->
-| Metric | Baseline RAG | Self-reflective RAG |
-|---|---|---|
-| correctness | _run eval_ | _run eval_ |
-| faithfulness | _run eval_ | _run eval_ |
-| refusal_acc | _run eval_ | _run eval_ |
-| avg_llm_calls | _run eval_ | _run eval_ |
+  Setting                         Purpose
+  ------------------------------- --------------------------------------
+  `LLM_PROVIDER`                  Language-model provider
+  `LLM_MODEL`                     Model name
+  `OLLAMA_HOST`                   Ollama server URL
+  `EMBEDDING_MODEL`               Embedding model
+  `CHROMA_DIR`                    Local vector database directory
+  `COLLECTION_NAME`               Chroma collection
+  `RAW_DIR`                       Raw document directory
+  `CHUNK_SIZE`, `CHUNK_OVERLAP`   Document chunking
+  `TOP_K`                         Number of candidate passages
+  `MAX_RETRIES`                   Maximum retry count
+  `MIN_RELEVANT`                  Minimum relevant passages to proceed
+  `SUPPORT_THRESHOLD`             Answer-support threshold
 
-Method and caveats: [docs/EVALUATION.md](docs/EVALUATION.md)
+See [`src/config.py`](src/config.py) and `.env.example` for the current
+supported settings.
 
-## Project layout
+## Security
 
-```
-src/        pipeline, router, grader, generator, verifier, rewriter, ingest, retriever
-api/        FastAPI service          app/   Streamlit UI
-eval/       test-set generation + benchmark runner
-scripts/    corpus download          tests/ unit tests (fake LLM, no network)
-docs/       PRD, architecture, pipeline, data, evaluation, API, setup, decisions
-```
+-   Never commit `.env` or `.envx`.
+-   Keep real credentials out of `.env.example`.
+-   Do not commit private source documents or API keys.
+-   Keep local indexes and virtual environments excluded from Git.
+-   Review `git status` before committing.
 
-## Limitations & future work
+## Known limitations
 
-- Reflection costs extra LLM calls and latency (quantified in the results table).
-- LLM-as-judge evaluation is imperfect; use a stronger judge model and spot-check manually.
-- Future: hybrid BM25 + dense search, cross-encoder reranking, streaming responses, query-log dashboard.
+-   Answer quality depends on the coverage and quality of the indexed
+    documents.
+-   Latency and answer quality vary by model and hardware.
+-   Relevance grading and verification are model judgments and can be
+    wrong.
+-   Passing verification is not a formal proof of factual correctness.
+-   Evaluation results depend on the corpus and configuration.
+
+## Documentation
+
+-   [Requirements and scope](docs/PRD.md)
+-   [Architecture](docs/ARCHITECTURE.md)
+-   [Pipeline](docs/PIPELINE.md)
+-   [Setup](docs/SETUP.md)
+-   [API](docs/API.md)
+-   [Data preparation](docs/DATA.md)
+-   [Evaluation](docs/EVALUATION.md)
+-   [Design decisions](docs/DECISIONS.md)
+
+## Contributing
+
+Issues and contributions are welcome. Run the test suite before
+submitting changes and do not include credentials, local indexes, or
+private data. See [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
 ## License
 
-MIT
+See [`LICENSE`](LICENSE) for the license that applies to this
+repository.
