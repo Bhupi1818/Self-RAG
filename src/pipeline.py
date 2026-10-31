@@ -8,7 +8,7 @@ from .llm import LLM
 from .prompts import REFUSAL_TEXT, is_refusal
 from .rewriter import rewrite
 from .router import route
-from .schemas import Result, VerifyResult
+from .schemas import Result
 from .verifier import verify
 
 
@@ -44,8 +44,8 @@ class SelfRAGPipeline:
 
         # Keep the best non-refusal candidate across retries.
         best_answer = None
-        best_sources = []
-        best_contexts = []
+        # best_sources = []
+        # best_contexts = []
         best_confidence = -1.0
         best_answers_question = False
 
@@ -175,8 +175,8 @@ class SelfRAGPipeline:
                         )
                     ):
                         best_answer = draft
-                        best_sources = [c.to_source() for c in relevant]
-                        best_contexts = [c.text for c in relevant]
+                        # best_sources = [c.to_source() for c in relevant]
+                        # best_contexts = [c.text for c in relevant]
                         best_confidence = candidate_score
                         best_answers_question = check.answers_question
 

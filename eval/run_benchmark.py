@@ -1,10 +1,10 @@
 import json
 import time
-import requests
 from pathlib import Path
 
-from sentence_transformers import SentenceTransformer
 import numpy as np
+import requests
+from sentence_transformers import SentenceTransformer
 
 API_URL = "http://127.0.0.1:8000/ask"
 DATASET = Path(__file__).parent / "benchmark.json"
