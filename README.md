@@ -309,7 +309,3 @@ Issues and contributions are welcome. Run the test suite before
 submitting changes and do not include credentials, local indexes, or
 private data. See [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
-## License
-
-See [`LICENSE`](LICENSE) for the license that applies to this
-repository.
